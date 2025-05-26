@@ -49,7 +49,6 @@ for i in range(len(arr) - 1, 0, -1):
 else:
     arr.reverse()
     print(arr)
-    # Don't exit here; let the program end naturally
 
 next_greater = float('inf')
 maxInd = ind
@@ -59,7 +58,6 @@ for i in range(ind, len(arr)):
         maxInd = i
 arr[ind - 1], arr[maxInd] = arr[maxInd], arr[ind - 1]
 
-# Correctly sort the suffix in-place
 arr[ind:] = sorted(arr[ind:])
 
 print(arr)
