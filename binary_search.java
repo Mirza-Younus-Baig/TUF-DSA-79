@@ -39,6 +39,7 @@ class binary_search {
         binary_search bs = new binary_search();
         int result = bs.search(nums, target);
         System.out.println("Target found at index: " + result);
+        sc.close();
         
     }
 }
