@@ -1,0 +1,562 @@
+# 30 Essential System Design Concepts for Beginners
+
+*A comprehensive study guide to master the fundamental building blocks of scalable systems*
+
+---
+
+## 1. Client-Server Architecture
+
+**What it is**: The foundation of most web applications where clients (browsers, mobile apps) communicate with servers to request and receive data.
+
+**Example**: When you visit a website, your browser (client) sends a request to a web server, which processes it and sends back the webpage.
+
+**Key Points**:
+
+- Client initiates requests
+- Server processes and responds
+- Forms the basis of most distributed systems
+
+---
+
+## 2. IP Address
+
+**What it is**: Unique numerical identifiers that allow computers to locate and communicate with each other over the internet.
+
+**Example**: `192.168.1.1` (private network) or `8.8.8.8` (Google's DNS server)
+
+**Key Points**:
+
+- Every publicly accessible server has a unique IP address
+- IPv4 format: `xxx.xxx.xxx.xxx`
+- IPv6 format: longer hexadecimal format for more addresses
+
+---
+
+## 3. DNS (Domain Name System)
+
+**What it is**: Translates human-readable domain names into IP addresses.
+
+**Example**: When you type `google.com`, DNS converts it to Google's IP address `142.250.190.78`
+
+**Key Points**:
+
+- Acts like a phone book for the internet
+- Hierarchical system with multiple DNS servers
+- Caching improves performance
+
+---
+
+## 4. Proxy / Reverse Proxy
+
+**What it is**:
+
+- **Proxy**: Acts on behalf of clients, hiding their identity from servers
+- **Reverse Proxy**: Acts on behalf of servers, hiding server details from clients
+
+**Examples**:
+
+- **Proxy**: Corporate firewall filtering employee internet access
+- **Reverse Proxy**: Cloudflare sitting in front of your website
+
+**Key Points**:
+
+- Provides security, caching, and load distribution
+- Can filter, modify, or log requests
+
+---
+
+## 5. Latency
+
+**What it is**: The time delay between sending a request and receiving a response.
+
+**Example**: If your server is in New York and user is in India, the round-trip time creates latency.
+
+**Key Points**:
+
+- Measured in milliseconds (ms)
+- Affected by physical distance, network congestion, processing time
+- Can be reduced with CDNs and edge servers
+
+---
+
+## 6. HTTP/HTTPS
+
+**What it is**:
+
+- **HTTP**: Protocol for transferring data between clients and servers
+- **HTTPS**: Secure version with encryption
+
+**Example**:
+
+- `http://example.com` - unencrypted
+- `https://example.com` - encrypted with SSL/TLS
+
+**Key Points**:
+
+- HTTP methods: GET, POST, PUT, DELETE
+- HTTPS protects against data interception
+- Status codes: 200 (OK), 404 (Not Found), 500 (Server Error)
+
+---
+
+## 7. APIs (Application Programming Interfaces)
+
+**What it is**: Set of rules and protocols that allow different software applications to communicate.
+
+**Example**: Weather app using OpenWeatherMap API to get current weather data
+
+**Key Points**:
+
+- Defines how requests and responses should be structured
+- Enables integration between different systems
+- Common formats: JSON, XML
+
+---
+
+## 8. REST API
+
+**What it is**: Architectural style for designing web APIs using standard HTTP methods.
+
+**Example**:
+
+- `GET /api/users/123` - Get user with ID 123
+- `POST /api/users` - Create new user
+- `PUT /api/users/123` - Update user 123
+- `DELETE /api/users/123` - Delete user 123
+
+**Key Points**:
+
+- Stateless communication
+- Resource-based URLs
+- Uses standard HTTP methods
+
+---
+
+## 9. GraphQL
+
+**What it is**: Query language that allows clients to request exactly the data they need.
+
+**Example**:
+
+```graphql
+query {
+  user(id: 123) {
+    name
+    email
+    posts {
+      title
+      date
+    }
+  }
+}
+
+```
+
+**Key Points**:
+
+- Single endpoint for all operations
+- Reduces over-fetching and under-fetching
+- More complex to implement than REST
+
+---
+
+## 10. Databases
+
+**What it is**: Organized collection of structured information stored electronically.
+
+**Example**: MySQL database storing user accounts, orders, and products for an e-commerce site
+
+**Key Points**:
+
+- Persistent data storage
+- Supports CRUD operations (Create, Read, Update, Delete)
+- Ensures data integrity and security
+
+---
+
+## 11. SQL vs NoSQL
+
+**What it is**: Two main categories of database management systems.
+
+**SQL Examples**:
+
+- MySQL, PostgreSQL, SQL Server
+- Structured data in tables with relationships
+- ACID properties (Atomicity, Consistency, Isolation, Durability)
+
+**NoSQL Examples**:
+
+- MongoDB (Document), Redis (Key-Value), Cassandra (Wide-Column), Neo4j (Graph)
+- Flexible schema, high scalability
+- BASE properties (Basically Available, Soft state, Eventual consistency)
+
+**When to use**:
+
+- SQL: Banking systems, traditional applications requiring strong consistency
+- NoSQL: Social media, real-time analytics, high-scale applications
+
+---
+
+## 12. Vertical Scaling (Scale Up)
+
+**What it is**: Increasing the capacity of existing servers by adding more CPU, RAM, or storage.
+
+**Example**: Upgrading a server from 8GB to 32GB RAM to handle more traffic
+
+**Key Points**:
+
+- Quick and simple solution
+- Has hardware limits
+- Single point of failure
+- Becomes exponentially expensive
+
+---
+
+## 13. Horizontal Scaling (Scale Out)
+
+**What it is**: Adding more servers to distribute the load across multiple machines.
+
+**Example**: Netflix using thousands of servers worldwide to handle streaming requests
+
+**Key Points**:
+
+- Better fault tolerance
+- Theoretically unlimited scaling
+- More complex to implement
+- Requires load balancing
+
+---
+
+## 14. Load Balancers
+
+**What it is**: Distributes incoming requests across multiple servers to prevent overload.
+
+**Example**: AWS Application Load Balancer distributing traffic across multiple EC2 instances
+
+**Algorithms**:
+
+- **Round Robin**: Requests sent to servers in sequence
+- **Least Connections**: Routes to server with fewest active connections
+- **IP Hash**: Same client always goes to same server
+
+**Key Points**:
+
+- Improves reliability and performance
+- Can detect and route around failed servers
+- Essential for horizontal scaling
+
+---
+
+## 15. Database Indexing
+
+**What it is**: Creates efficient lookup structures to speed up database queries.
+
+**Example**: Creating an index on `email` column to quickly find users by email address
+
+**Key Points**:
+
+- Dramatically improves read performance
+- Slows down write operations
+- Uses additional storage space
+- Best for frequently queried columns
+
+---
+
+## 16. Replication
+
+**What it is**: Creating copies of data across multiple database servers.
+
+**Example**: MySQL master-slave setup where writes go to master, reads distributed across slaves
+
+**Types**:
+
+- **Master-Slave**: One primary for writes, multiple replicas for reads
+- **Master-Master**: Multiple primaries can handle writes
+
+**Key Points**:
+
+- Improves read performance and availability
+- Provides data redundancy
+- Requires synchronization mechanisms
+
+---
+
+## 17. Sharding
+
+**What it is**: Horizontally partitioning data across multiple database servers.
+
+**Example**: Instagram sharding user data by user ID ranges (1-1M on Server 1, 1M-2M on Server 2)
+
+**Sharding Strategies**:
+
+- **Range-based**: Divide by value ranges
+- **Hash-based**: Use hash function on key
+- **Directory-based**: Lookup service tracks data location
+
+**Key Points**:
+
+- Enables massive scale
+- Increases complexity
+- Can cause uneven load distribution
+
+---
+
+## 18. Vertical Partitioning
+
+**What it is**: Splitting database tables by columns to reduce query complexity.
+
+**Example**: Splitting a large User table into:
+
+- `UserProfile` (name, email, avatar)
+- `UserPreferences` (settings, notifications)
+- `UserBilling` (payment info, address)
+
+**Key Points**:
+
+- Reduces I/O for specific queries
+- Improves cache efficiency
+- May require joins for complete data
+
+---
+
+## 19. Caching
+
+**What it is**: Storing frequently accessed data in fast storage (usually memory) to reduce database load.
+
+**Example**: Redis caching user session data to avoid database lookups on every request
+
+**Strategies**:
+
+- **Cache-Aside**: Application manages cache
+- **Write-Through**: Write to cache and database simultaneously
+- **Write-Behind**: Write to cache immediately, database later
+
+**Key Points**:
+
+- Dramatically improves performance
+- Reduces database load
+- Requires cache invalidation strategy
+- Common tools: Redis, Memcached
+
+---
+
+## 20. Denormalization
+
+**What it is**: Deliberately introducing redundancy to improve read performance by reducing joins.
+
+**Example**: Storing user name in both `Users` and `Orders` tables to avoid joins when displaying order history
+
+**Key Points**:
+
+- Trades storage space for query speed
+- Reduces complex joins
+- Increases update complexity
+- Common in read-heavy applications
+
+---
+
+## 21. CAP Theorem
+
+**What it is**: States that distributed systems can only guarantee two of three properties:
+
+- **Consistency**: All nodes return the same data simultaneously
+- **Availability**: System remains operational
+- **Partition Tolerance**: System continues despite network failures
+
+**Examples**:
+
+- **CP System**: Traditional RDBMS (MySQL)
+- **AP System**: NoSQL databases (Cassandra, DynamoDB)
+
+**Key Points**:
+
+- Network partitions are inevitable
+- Must choose between consistency and availability
+- Understanding helps in database selection
+
+---
+
+## 22. Blob Storage
+
+**What it is**: Storage service optimized for unstructured data like images, videos, and documents.
+
+**Example**: Amazon S3 storing profile pictures, with URLs like `https://mybucket.s3.amazonaws.com/profiles/user123.jpg`
+
+**Key Points**:
+
+- Highly scalable and durable
+- Pay-as-you-use pricing
+- RESTful API access
+- Automatic replication across regions
+
+---
+
+## 23. CDN (Content Delivery Network)
+
+**What it is**: Geographically distributed servers that cache content closer to users.
+
+**Example**: Netflix using CDN to serve movies from servers near users rather than central data centers
+
+**Key Points**:
+
+- Reduces latency and bandwidth costs
+- Improves user experience globally
+- Caches static content (images, videos, CSS, JS)
+- Popular providers: CloudFlare, AWS CloudFront
+
+---
+
+## 24. WebSockets
+
+**What it is**: Enables real-time, bidirectional communication between client and server.
+
+**Example**: Slack chat application where messages appear instantly without refreshing
+
+**Key Points**:
+
+- Persistent connection unlike HTTP request-response
+- Enables real-time features
+- Lower latency than polling
+- Used in chat apps, live updates, gaming
+
+---
+
+## 25. Webhooks
+
+**What it is**: HTTP callbacks triggered by events, allowing servers to notify other servers immediately.
+
+**Example**: GitHub sending a webhook to Jenkins when code is pushed, triggering automatic deployment
+
+**Key Points**:
+
+- Event-driven communication
+- Eliminates need for polling
+- More efficient than repeated API calls
+- Requires endpoint registration
+
+---
+
+## 26. Microservices
+
+**What it is**: Architectural approach that structures applications as collection of loosely coupled services.
+
+**Example**: Netflix architecture with separate services for:
+
+- User authentication
+- Movie recommendations
+- Video streaming
+- Billing
+
+**Benefits**:
+
+- Independent deployment and scaling
+- Technology diversity
+- Fault isolation
+
+**Challenges**:
+
+- Increased complexity
+- Network communication overhead
+- Data consistency
+
+---
+
+## 27. Message Queues
+
+**What it is**: Enables asynchronous communication between services through message passing.
+
+**Example**: E-commerce order processing:
+
+1. Order service sends "ProcessPayment" message to queue
+2. Payment service processes when ready
+3. Sends "SendConfirmation" message for email service
+
+**Popular Tools**: Apache Kafka, RabbitMQ, Amazon SQS
+
+**Key Points**:
+
+- Decouples services
+- Improves reliability and scalability
+- Enables asynchronous processing
+
+---
+
+## 28. Rate Limiting
+
+**What it is**: Controls the number of requests a client can make within a specific time period.
+
+**Example**: Twitter API allowing 300 requests per 15-minute window
+
+**Algorithms**:
+
+- **Fixed Window**: 100 requests per minute
+- **Sliding Window**: Dynamic window adjustment
+- **Token Bucket**: Tokens replenish at fixed rate
+
+**Key Points**:
+
+- Prevents system abuse
+- Protects against DDoS attacks
+- Ensures fair resource usage
+
+---
+
+## 29. API Gateway
+
+**What it is**: Single entry point that handles routing, authentication, rate limiting, and monitoring for microservices.
+
+**Example**: AWS API Gateway managing all requests to microservices, handling authentication and routing
+
+**Features**:
+
+- Request routing
+- Authentication and authorization
+- Rate limiting
+- Request/response transformation
+- Monitoring and analytics
+
+**Key Points**:
+
+- Simplifies client integration
+- Centralized cross-cutting concerns
+- Single point of failure if not designed properly
+
+---
+
+## 30. Idempotency
+
+**What it is**: Property where multiple identical requests have the same effect as a single request.
+
+**Example**: Payment processing where duplicate requests with same ID are ignored to prevent double charging
+
+**Implementation**:
+
+- Unique request IDs
+- Database checks for processed requests
+- Same response for duplicate requests
+
+**Key Points**:
+
+- Critical for payment and financial systems
+- Prevents unintended side effects
+- Essential in distributed systems with retries
+
+---
+
+## Study Tips
+
+1. **Start with basics**: Master concepts 1-10 before moving to advanced topics
+2. **Practice with examples**: Try to identify these concepts in systems you use daily
+3. **Draw diagrams**: Visualize how components interact
+4. **Build projects**: Implement simple versions to understand practically
+5. **Focus on trade-offs**: Understand when to use each concept and why
+
+## Next Steps
+
+- Study real-world system architectures (Instagram, Twitter, WhatsApp)
+- Practice system design interviews
+- Explore cloud services (AWS, GCP, Azure)
+- Learn about monitoring and observability
+- Understand security patterns and practices
+
+---
