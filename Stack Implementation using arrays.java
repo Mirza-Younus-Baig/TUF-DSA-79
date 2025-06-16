@@ -45,16 +45,17 @@ class myStack{
 
     }
 
-    public void printStack(){
-        if(isEmpty()) System.out.println("The Stack is empty");
-        else{
-            int temp = top;
-            while(temp > 0){
-                System.out.print(arr[temp--]+  "->");
-            }
-            System.out.println(arr[temp]);
+    public void printStack() {
+    if (isEmpty()) {
+        System.out.println("The Stack is empty");
+    } else {
+        for (int i = top; i >= 0; i--) {
+            System.out.print(arr[i]);
+            if (i != 0) System.out.print(" -> ");
         }
+        System.out.println();
     }
+}
 
 
 
