@@ -1,3 +1,5 @@
+import timeit
+
 # Contents: 
 # 1. Brute force approach
 # 2. Better Solution
@@ -55,9 +57,25 @@ def maxAreaRectangle2(arr):
 
     return maxArea
 
+# 3. Optimal Approach
+def maxAreaRectangle3(arr):
+    stack = []
+    maxArea = 0
+    n = len(arr)
+
+    for i in range(n + 1):
+        while stack and (i == n or arr[i] < arr[stack[-1]]):
+            height = arr[stack.pop()]
+            width = i if not stack else i - stack[-1] - 1
+            maxArea = max(maxArea, height * width)
+        stack.append(i)
+
+    return maxArea
+
 if __name__ == "__main__":
     arr = [2,1,5,6,2,3]
     print("Brute Force: " , maxAreaRectangle1(arr))
 
     print("Better solution: " , maxAreaRectangle2(arr))
 
+    print("Optimal solution: ", maxAreaRectangle3(arr))
